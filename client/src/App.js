@@ -66,7 +66,7 @@ class App extends React.Component {
                     key = {c.id}
                     id ={c.id}
                     image = {c.image}
-                    name = {c.name}
+                    name = {c.user_name}
                     birthday = {c.birthday}
                     gender = {c.gender}
                     job = {c.job}
@@ -74,7 +74,7 @@ class App extends React.Component {
                 );
               }) : 
               <TableRow>
-                <TableCell colspan="6" align="center">
+                <TableCell colSpan="6" align="center">
                   <CircularProgress className = {classes.progress} variant="determinate"
                     value = {this.state.completed} />
                 </TableCell>
@@ -90,6 +90,7 @@ class App extends React.Component {
     this.timer = setInterval(this.progress, 60);
     this.callApi()
       .then(res => this.setState({customers : res}))
+      .then(clearInterval(this.timer))
       .catch(err => console.log(err));
   }
 
