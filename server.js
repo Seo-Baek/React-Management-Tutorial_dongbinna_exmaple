@@ -25,7 +25,7 @@ const upload = multer({dest : './upload'});
 
 app.get('/api/customers',(req,res) => {
      connection.query(
-         "SELECT * FROM CUSTOMER",
+         "SELECT * FROM CUSTOMER WHERE isDeleted = 0",
          (err, rows, fields) => {
              res.send(rows);
          }
@@ -45,7 +45,8 @@ app.use('/image',express.static('./upload'));
  *  .field(fields) feilds는 name과 maxCount(선택사항)을 포함하는 Object 배열이어야 함
 */
 app.post('/api/customers', upload.single('image'),(req,res) => {
-    let sql = 'INSERT INTO CUSTOMER VALUES (null, ?,?,?,?,?)';
+    //now() mariaDB의 SYSDATE
+    let sql = 'INSERT INTO CUSTOMER VALUES (null, ?,?,?,?,?,now(),0,null)';
     let image = '/image/' + req.file.filename;
     let name = req.body.name;
     let birthday = req.body.birthday;
@@ -58,6 +59,17 @@ app.post('/api/customers', upload.single('image'),(req,res) => {
              res.send(rows);
         }
     );
+});
+
+app.delete('/api/customers/:id',(req,res) => {
+    let sql = 'UPDATE CUSTOMER SET isDeleted = 1 AND deletedDate = NOW() WHERE id =?';
+    let params = [req.params.id];
+    connection.query(sql,params,
+        (err,rows,fields) => {
+            res.send(rows);
+             console.log(rows);
+             console.log(err);
+        });
 });
 
 app.listen(port,()=> console.log(`Listening on port ${port}`));
