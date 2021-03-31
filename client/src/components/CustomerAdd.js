@@ -19,8 +19,17 @@ class CustomerAdd extends React.Component{
         e.preventDefault();
         this.addCustomer()
             .then((response) => {
-                console.log(response.data);
+                console.log(response);
             });
+        this.setState({
+            file : null,
+            userName : '',
+            birthday : '',
+            gender : '',
+            job : '',
+            fileName : ''
+        });
+        window.location.reload();
     };
 
     addCustomer = () => {
@@ -33,7 +42,7 @@ class CustomerAdd extends React.Component{
         formData.append('job',this.state.job);
         const config = {
             headers : {
-                'content-type' : 'multipart/form-data'
+                'Content-Type' : 'multipart/form-data'
             }
         }
         return post(url,formData,config);
@@ -58,13 +67,13 @@ class CustomerAdd extends React.Component{
                 <h1>고객 추가</h1>
                 프로필 이미지 : <input type="file" name="file" file={this.state.file} 
                                 value={this.state.fileName} onChange={this.handleFileChange} /><br />
-                이름 : <input type="text" name="name" value={this.state.userName}
+                이름 : <input type="text" name="userName" value={this.state.userName}
                         onChange={this.handleValueChange} /> <br />
-                생년월일 : <input type="birthday" name="birthday" value={this.state.birthday}
+                생년월일 : <input type="text" name="birthday" value={this.state.birthday}
                         onChange={this.handleValueChange} /> <br />
-                성별 : <input type="gender" name="gender" value={this.state.gender}
+                성별 : <input type="text" name="gender" value={this.state.gender}
                         onChange={this.handleValueChange} /> <br />
-                직업 : <input type="job" name="job" value={this.state.job}
+                직업 : <input type="text" name="job" value={this.state.job}
                         onChange={this.handleValueChange} /> <br />
                 <button type="submit">추가하기</button>
             </form>

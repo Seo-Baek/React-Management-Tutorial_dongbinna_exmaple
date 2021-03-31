@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Customer from './components/Customer';
 import CustomerAdd from './components/CustomerAdd';
 import './App.css';
@@ -14,7 +14,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const styles = theme => ({
   root : {
     width: '100%',
-    marginTop : theme.spacing.unit * 3,
+    marginTop :  theme.spacing(3),
     overflowX:'auto'
   },
   table: {
