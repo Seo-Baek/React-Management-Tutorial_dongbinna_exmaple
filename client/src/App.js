@@ -141,7 +141,7 @@ class App extends React.Component {
       });
     }
     const { classes } = this.props;
-    const cellList = ['번호','프로필 이미지','이름','생년월일','직업','설정']
+    const cellList = ['번호','프로필 이미지','이름','생년월일','성별','직업','설정']
     return (
       <div className={classes.root}>
         <AppBar position="static">
