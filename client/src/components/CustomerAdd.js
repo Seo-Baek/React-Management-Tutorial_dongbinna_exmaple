@@ -19,7 +19,7 @@ class CustomerAdd extends React.Component{
         e.preventDefault();
         this.addCustomer()
             .then((response) => {
-                console.log(response);
+                this.props.stateRefresh();
             });
         this.setState({
             file : null,
@@ -29,7 +29,7 @@ class CustomerAdd extends React.Component{
             job : '',
             fileName : ''
         });
-        window.location.reload();
+        // 전체새로고침으로 좋지 않음 window.location.reload();
     };
 
     addCustomer = () => {
