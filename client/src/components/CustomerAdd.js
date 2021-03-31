@@ -98,7 +98,6 @@ class CustomerAdd extends React.Component{
         const { classes } = this.props;
         return (
             <div>
-                <br />
                 <Button variant = "contained" color="primary" onClick={this.handleClickOpen}>
                     고객 추가하기
                 </Button>
